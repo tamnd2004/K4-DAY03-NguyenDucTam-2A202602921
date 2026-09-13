@@ -8,22 +8,22 @@
 
 Nhân viên muốn nghỉ phép phải tra số dư, tính ngày làm việc, kiểm tra điều kiện rồi tạo đơn. Chatbot chỉ trả văn bản không thể biết số dư hiện tại hoặc ghi đơn. PeopleOps dùng ReAct để nối các bước đọc/ghi và đổi nhánh theo dữ liệu nhận được. Hồ sơ và chính sách trong bài là dữ liệu hư cấu, không phải chính sách chính thức của VinFast.
 
-| Tiêu chí | Điểm | Giải trình |
-| --- | ---: | --- |
-| Multi-step Reasoning | 5/5 | Tra hồ sơ → tính ngày → so sánh quỹ phép → tạo đơn → xác nhận mã đơn. |
-| Tool Interaction | 5/5 | Cần đọc và ghi SQLite qua MCP; LLM không có dữ liệu này trong kiến thức sẵn có. |
-| Dynamic Decision | 5/5 | Thiếu phép, sai mã, trùng đơn hoặc thiếu thông tin dẫn tới nhánh xử lý khác nhau. |
-| Long Horizon Goal | 2/5 | Mục tiêu ngắn trong phiên; chưa tự theo dõi duyệt đơn hoặc nhắc việc dài hạn. |
-| **Tổng** | **17/20** | Phù hợp ReAct; chưa cần Autonomous Agent dài hạn. |
+| Tiêu chí             |      Điểm | Giải trình                                                                        |
+| -------------------- | --------: | --------------------------------------------------------------------------------- |
+| Multi-step Reasoning |       5/5 | Tra hồ sơ → tính ngày → so sánh quỹ phép → tạo đơn → xác nhận mã đơn.             |
+| Tool Interaction     |       5/5 | Cần đọc và ghi SQLite qua MCP; LLM không có dữ liệu này trong kiến thức sẵn có.   |
+| Dynamic Decision     |       5/5 | Thiếu phép, sai mã, trùng đơn hoặc thiếu thông tin dẫn tới nhánh xử lý khác nhau. |
+| Long Horizon Goal    |       2/5 | Mục tiêu ngắn trong phiên; chưa tự theo dõi duyệt đơn hoặc nhắc việc dài hạn.     |
+| **Tổng**             | **17/20** | Phù hợp ReAct; chưa cần Autonomous Agent dài hạn.                                 |
 
 Schema được sinh từ type hints bằng Pydantic, có `type`, `properties`, `required`, `additionalProperties=false`. MCP công bố schema qua `tools/list`; provider dùng chính schema discovery từ server. Router kiểm tra kiểu dữ liệu trước khi gọi hàm.
 
-| Công cụ | Input chính | Tác dụng |
-| --- | --- | --- |
-| `hr_query` | employee_id, topic (balance/profile/policy) | Tra hồ sơ, quỹ phép, chính sách demo. |
-| `calculate_leave_days` | start_date, end_date (YYYY-MM-DD) | Tính ngày làm việc, loại cuối tuần/ngày đóng cửa demo. |
-| `create_leave_request` | employee_id, start_date, end_date, reason | Kiểm tra lại điều kiện, ghi đơn PENDING và giữ chỗ phép. |
-| `list_leave_requests` | employee_id | Đọc danh sách và trạng thái đơn đã lưu. |
+| Công cụ                | Input chính                                 | Tác dụng                                                 |
+| ---------------------- | ------------------------------------------- | -------------------------------------------------------- |
+| `hr_query`             | employee_id, topic (balance/profile/policy) | Tra hồ sơ, quỹ phép, chính sách demo.                    |
+| `calculate_leave_days` | start_date, end_date (YYYY-MM-DD)           | Tính ngày làm việc, loại cuối tuần/ngày đóng cửa demo.   |
+| `create_leave_request` | employee_id, start_date, end_date, reason   | Kiểm tra lại điều kiện, ghi đơn PENDING và giữ chỗ phép. |
+| `list_leave_requests`  | employee_id                                 | Đọc danh sách và trạng thái đơn đã lưu.                  |
 
 Bằng chứng: [tools.py](../src/tools.py), [8 test cases và assertions](../config/test_cases.json).
 
@@ -50,16 +50,16 @@ Agent gọi LLM nhiều lượt, giữ model content/signatures và trả functi
 **Lần chạy ghi nhận:** `2026-09-13T13:29:34.181386+00:00` (UTC).
 **Kết quả API thật:** **8/8**; **12 tool calls**.
 
-| Case | Tình huống | Kết quả | Chuỗi công cụ |
-| --- | --- | --- | --- |
-| TC01 | direct_query | PASS | Không gọi tool |
-| TC02 | single_tool_query | PASS | hr_query |
-| TC03 | leave_request | PASS | hr_query → calculate_leave_days → create_leave_request |
-| TC04 | conditional_multi_step | PASS | hr_query → calculate_leave_days → create_leave_request |
-| TC05 | unknown_employee | PASS | hr_query |
-| TC06 | insufficient_balance | PASS | hr_query → calculate_leave_days |
-| TC07 | missing_details | PASS | hr_query |
-| TC08 | policy_lookup | PASS | hr_query |
+| Case | Tình huống             | Kết quả | Chuỗi công cụ                                          |
+| ---- | ---------------------- | ------- | ------------------------------------------------------ |
+| TC01 | direct_query           | PASS    | Không gọi tool                                         |
+| TC02 | single_tool_query      | PASS    | hr_query                                               |
+| TC03 | leave_request          | PASS    | hr_query → calculate_leave_days → create_leave_request |
+| TC04 | conditional_multi_step | PASS    | hr_query → calculate_leave_days → create_leave_request |
+| TC05 | unknown_employee       | PASS    | hr_query                                               |
+| TC06 | insufficient_balance   | PASS    | hr_query → calculate_leave_days                        |
+| TC07 | missing_details        | PASS    | hr_query                                               |
+| TC08 | policy_lookup          | PASS    | hr_query                                               |
 
 TC01–TC05 là năm case chính theo lab; TC06–TC08 mở rộng thiếu phép, thiếu thông tin và chính sách. Mỗi case chạy trên SQLite tạm riêng; kiểm tra trạng thái database, tham số, thứ tự đọc trước ghi, mã đơn xuất hiện trong câu trả lời và các Observation bắt buộc.
 
@@ -131,11 +131,7 @@ Trích các trường liên quan từ **TC04**, run_id **a4984ca9db6f425c9a0d42f
       "start_date": "2026-09-18",
       "end_date": "2026-09-22",
       "days": 3,
-      "workdays": [
-        "2026-09-18",
-        "2026-09-21",
-        "2026-09-22"
-      ],
+      "workdays": ["2026-09-18", "2026-09-21", "2026-09-22"],
       "excluded_days": 2,
       "calendar": "Lịch demo 2026"
     }
@@ -225,7 +221,5 @@ Kiểm tra bản đã đẩy bằng `git status --short`, `git log -1 --oneline`
 .\.venv\Scripts\python.exe src\app.py --all --offline
 .\.venv\Scripts\python.exe -m pytest -q
 ```
-
-Ngày tham chiếu của dữ liệu demo là 13/09/2026, năm phép 2026. Chưa có đăng nhập/phân quyền, phê duyệt/hủy đơn hoặc tích hợp HRIS. Lịch đóng cửa giả lập không phải lịch nghỉ lễ pháp định đầy đủ. API thật vẫn phụ thuộc mạng/quota; offline được ghi nhãn riêng. Hướng dẫn demo: [DEMO_SCRIPT.md](DEMO_SCRIPT.md).
 
 Nguồn kỹ thuật: [Gemini function calling](https://ai.google.dev/gemini-api/docs/function-calling), [MCP Python SDK v1](https://github.com/modelcontextprotocol/python-sdk/tree/v1.x).
