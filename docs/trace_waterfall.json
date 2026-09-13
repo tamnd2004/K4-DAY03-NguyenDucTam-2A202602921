@@ -1,29 +1,1351 @@
-[
-  {
-    "step": 1,
-    "query": "Chào bạn, bạn có thể giới thiệu quy chế học vụ cơ bản của Đại học VinUni không?",
-    "action_type": "FINAL_ANSWER",
-    "thought": "Câu hỏi chung về quy chế học vụ, trả lời trực tiếp không cần gọi Tool.",
-    "output": "[Mock Agent Response]: Xin chào! Quy chế học vụ VinUni yêu cầu sinh viên tích lũy tối thiểu 120 tín chỉ và duy trì GPA trên 2.0 để tốt nghiệp.",
-    "latency_ms": 2845.93
-  },
-  {
-    "step": 1,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
-    "action_type": "TOOL_EXECUTION",
-    "tool_name": "academic_query",
-    "arguments": {
-      "student_id": "SV2026001"
+{
+  "generated_at": "2026-09-13T09:16:11.930735+00:00",
+  "mode": "live",
+  "data": "fictional_hr_demo",
+  "transport": "MCP stdio",
+  "passed": 7,
+  "total": 8,
+  "evaluations": [
+    {
+      "id": "TC01",
+      "passed": true,
+      "checks": {
+        "completed": true,
+        "answer_present": true,
+        "required_tools": true,
+        "forbidden_tools": true,
+        "writes": true,
+        "no_tools": true
+      },
+      "tool_calls": 0,
+      "run_id": "91385cce2428427b8e85e6eabca65b4d",
+      "live": true
     },
-    "observation": {},
-    "latency_ms": 799.12
-  },
-  {
-    "step": 2,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
-    "action_type": "FINAL_ANSWER",
-    "thought": "Tổng hợp kết quả từ MCP Server thành công.",
-    "output": "Chưa thể trả lời chi tiết do chưa nhận được dữ liệu từ MCP Server (hãy hoàn thành TODO 2.1).",
-    "latency_ms": 10.0
-  }
-]
+    {
+      "id": "TC02",
+      "passed": true,
+      "checks": {
+        "completed": true,
+        "answer_present": true,
+        "required_tools": true,
+        "forbidden_tools": true,
+        "writes": true,
+        "observation_status": true,
+        "observation_fields": true
+      },
+      "tool_calls": 1,
+      "run_id": "335f0c54d1e94c15912b0ca880607724",
+      "live": true
+    },
+    {
+      "id": "TC03",
+      "passed": true,
+      "checks": {
+        "completed": true,
+        "answer_present": true,
+        "required_tools": true,
+        "forbidden_tools": true,
+        "writes": true,
+        "pending": true,
+        "days": true,
+        "request_fields": true,
+        "grounded_id": true,
+        "read_before_write": true
+      },
+      "tool_calls": 3,
+      "run_id": "527676ffde6241cdb3dac289bebad89a",
+      "live": true
+    },
+    {
+      "id": "TC04",
+      "passed": true,
+      "checks": {
+        "completed": true,
+        "answer_present": true,
+        "required_tools": true,
+        "forbidden_tools": true,
+        "writes": true,
+        "pending": true,
+        "days": true,
+        "request_fields": true,
+        "grounded_id": true,
+        "read_before_write": true
+      },
+      "tool_calls": 3,
+      "run_id": "18f982d3b6134cf48ae352df5be102e3",
+      "live": true
+    },
+    {
+      "id": "TC05",
+      "passed": true,
+      "checks": {
+        "completed": true,
+        "answer_present": true,
+        "required_tools": true,
+        "forbidden_tools": true,
+        "writes": true,
+        "observation_status": true
+      },
+      "tool_calls": 1,
+      "run_id": "d31de97b1adc4aaea4010340566cf57e",
+      "live": true
+    },
+    {
+      "id": "TC06",
+      "passed": true,
+      "checks": {
+        "completed": true,
+        "answer_present": true,
+        "required_tools": true,
+        "forbidden_tools": true,
+        "writes": true
+      },
+      "tool_calls": 2,
+      "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+      "live": true
+    },
+    {
+      "id": "TC07",
+      "passed": false,
+      "checks": {
+        "completed": false,
+        "answer_present": true,
+        "required_tools": true,
+        "forbidden_tools": true,
+        "writes": true
+      },
+      "tool_calls": 0,
+      "run_id": "6ac1f5dd2923428ab2cb0b2e85fa9e8d",
+      "live": true
+    },
+    {
+      "id": "TC08",
+      "passed": true,
+      "checks": {
+        "completed": true,
+        "answer_present": true,
+        "required_tools": true,
+        "forbidden_tools": true,
+        "writes": true,
+        "observation_status": true,
+        "observation_fields": true
+      },
+      "tool_calls": 1,
+      "run_id": "18f5aac386444e8fa434f09ef1205d6d",
+      "live": true
+    }
+  ],
+  "runs": [
+    {
+      "test_case": "TC01",
+      "run_id": "91385cce2428427b8e85e6eabca65b4d",
+      "status": "completed",
+      "answer": "Xin chào! Tôi là **PeopleOps**, trợ lý nhân sự ảo. Tôi có thể hỗ trợ bạn các công việc sau:\n\n1. **Tra cứu thông tin:** Kiểm tra quỹ phép khả dụng, hồ sơ nhân viên và các quy định/chính sách nghỉ phép demo.\n2. **Quản lý đơn nghỉ phép:** Tra cứu danh sách và trạng thái các đơn nghỉ phép đã gửi.\n3. **Tính ngày nghỉ:** Tính toán số ngày làm việc thực tế cho khoảng thời gian bạn dự định nghỉ (đã trừ cuối tuần và ngày lễ/đóng cửa).\n4. **Tạo đơn xin nghỉ phép:** Tiếp nhận và tạo đơn xin nghỉ phép mới (ở trạng thái chờ duyệt) theo thông tin bạn cung cấp.\n\nNếu bạn cần hỗ trợ thông tin gì, hãy cung cấp mã nhân viên (ví dụ: `NV001`) để bắt đầu nhé!",
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "live": true,
+      "mode": "agent",
+      "tool_calls": 0,
+      "tokens": 1275,
+      "duration_ms": 6331.5,
+      "trace": [
+        {
+          "run_id": "91385cce2428427b8e85e6eabca65b4d",
+          "step": 0,
+          "query": "Chào bạn, hãy giới thiệu ngắn gọn bạn có thể hỗ trợ nhân sự như thế nào.",
+          "action_type": "RUN_START",
+          "timestamp": "2026-09-13T09:10:54.256965+00:00",
+          "offset_ms": 0.23,
+          "latency_ms": 0,
+          "provider": "gemini",
+          "model": "gemini-3.8-flash",
+          "live": true,
+          "mode": "agent"
+        },
+        {
+          "run_id": "91385cce2428427b8e85e6eabca65b4d",
+          "step": 0,
+          "query": "Chào bạn, hãy giới thiệu ngắn gọn bạn có thể hỗ trợ nhân sự như thế nào.",
+          "action_type": "MCP_READY",
+          "timestamp": "2026-09-13T09:10:55.490222+00:00",
+          "offset_ms": 1233.47,
+          "latency_ms": 1233.2,
+          "tools": [
+            "hr_query",
+            "calculate_leave_days",
+            "create_leave_request",
+            "list_leave_requests"
+          ],
+          "transport": "stdio · JSON-RPC 2.0"
+        },
+        {
+          "run_id": "91385cce2428427b8e85e6eabca65b4d",
+          "step": 1,
+          "query": "Chào bạn, hãy giới thiệu ngắn gọn bạn có thể hỗ trợ nhân sự như thế nào.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:10:55.490222+00:00",
+          "offset_ms": 1233.5,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "91385cce2428427b8e85e6eabca65b4d",
+          "step": 1,
+          "query": "Chào bạn, hãy giới thiệu ngắn gọn bạn có thể hỗ trợ nhân sự như thế nào.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:11:00.413817+00:00",
+          "offset_ms": 6156.87,
+          "latency_ms": 4923.35,
+          "summary": "Đã có phản hồi cuối",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "91385cce2428427b8e85e6eabca65b4d",
+          "step": 1,
+          "query": "Chào bạn, hãy giới thiệu ngắn gọn bạn có thể hỗ trợ nhân sự như thế nào.",
+          "action_type": "FINAL_ANSWER",
+          "timestamp": "2026-09-13T09:11:00.413817+00:00",
+          "offset_ms": 6156.88,
+          "latency_ms": 0,
+          "output": "Xin chào! Tôi là **PeopleOps**, trợ lý nhân sự ảo. Tôi có thể hỗ trợ bạn các công việc sau:\n\n1. **Tra cứu thông tin:** Kiểm tra quỹ phép khả dụng, hồ sơ nhân viên và các quy định/chính sách nghỉ phép demo.\n2. **Quản lý đơn nghỉ phép:** Tra cứu danh sách và trạng thái các đơn nghỉ phép đã gửi.\n3. **Tính ngày nghỉ:** Tính toán số ngày làm việc thực tế cho khoảng thời gian bạn dự định nghỉ (đã trừ cuối tuần và ngày lễ/đóng cửa).\n4. **Tạo đơn xin nghỉ phép:** Tiếp nhận và tạo đơn xin nghỉ phép mới (ở trạng thái chờ duyệt) theo thông tin bạn cung cấp.\n\nNếu bạn cần hỗ trợ thông tin gì, hãy cung cấp mã nhân viên (ví dụ: `NV001`) để bắt đầu nhé!"
+        }
+      ]
+    },
+    {
+      "test_case": "TC02",
+      "run_id": "335f0c54d1e94c15912b0ca880607724",
+      "status": "completed",
+      "answer": "Thông tin quỹ phép của nhân viên **Nguyễn Đức Tâm** (Mã: **NV001**):\n\n* **Vị trí / Phòng ban:** AI Engineer - Engineering\n* **Tổng số phép năm 2026:** 18 ngày\n* **Đã sử dụng:** 6 ngày\n* **Đang chờ duyệt:** 0 ngày\n* **Quỹ phép còn lại khả dụng:** **12 ngày**",
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "live": true,
+      "mode": "agent",
+      "tool_calls": 1,
+      "tokens": 2387,
+      "duration_ms": 27787.01,
+      "trace": [
+        {
+          "run_id": "335f0c54d1e94c15912b0ca880607724",
+          "step": 0,
+          "query": "Hãy tra cứu quỹ phép còn lại của nhân viên NV001.",
+          "action_type": "RUN_START",
+          "timestamp": "2026-09-13T09:11:01.479926+00:00",
+          "offset_ms": 0.2,
+          "latency_ms": 0,
+          "provider": "gemini",
+          "model": "gemini-3.8-flash",
+          "live": true,
+          "mode": "agent"
+        },
+        {
+          "run_id": "335f0c54d1e94c15912b0ca880607724",
+          "step": 0,
+          "query": "Hãy tra cứu quỹ phép còn lại của nhân viên NV001.",
+          "action_type": "MCP_READY",
+          "timestamp": "2026-09-13T09:11:03.046710+00:00",
+          "offset_ms": 1566.6,
+          "latency_ms": 1566.36,
+          "tools": [
+            "hr_query",
+            "calculate_leave_days",
+            "create_leave_request",
+            "list_leave_requests"
+          ],
+          "transport": "stdio · JSON-RPC 2.0"
+        },
+        {
+          "run_id": "335f0c54d1e94c15912b0ca880607724",
+          "step": 1,
+          "query": "Hãy tra cứu quỹ phép còn lại của nhân viên NV001.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:11:03.046710+00:00",
+          "offset_ms": 1566.61,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "335f0c54d1e94c15912b0ca880607724",
+          "step": 1,
+          "query": "Hãy tra cứu quỹ phép còn lại của nhân viên NV001.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:11:15.525397+00:00",
+          "offset_ms": 14044.91,
+          "latency_ms": 12478.27,
+          "summary": "Đề xuất: hr_query",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "335f0c54d1e94c15912b0ca880607724",
+          "step": 1,
+          "query": "Hãy tra cứu quỹ phép còn lại của nhân viên NV001.",
+          "action_type": "ACTION",
+          "timestamp": "2026-09-13T09:11:15.525397+00:00",
+          "offset_ms": 14044.92,
+          "latency_ms": 0,
+          "tool_name": "hr_query",
+          "arguments": {
+            "employee_id": "NV001",
+            "topic": "balance"
+          },
+          "call_id": "52ae755d016e485d9560a7f0fea3695b"
+        },
+        {
+          "run_id": "335f0c54d1e94c15912b0ca880607724",
+          "step": 1,
+          "query": "Hãy tra cứu quỹ phép còn lại của nhân viên NV001.",
+          "action_type": "OBSERVATION",
+          "timestamp": "2026-09-13T09:11:15.561400+00:00",
+          "offset_ms": 14081.28,
+          "latency_ms": 36.34,
+          "tool_name": "hr_query",
+          "call_id": "52ae755d016e485d9560a7f0fea3695b",
+          "observation": {
+            "status": "SUCCESS",
+            "employee": {
+              "employee_id": "NV001",
+              "full_name": "Nguyễn Đức Tâm",
+              "department": "Engineering",
+              "position": "AI Engineer",
+              "manager": "Trần Minh Anh",
+              "allowance": 18,
+              "used": 6,
+              "pending_days": 0,
+              "available_days": 12
+            },
+            "policies": null,
+            "source": "SQLite · dữ liệu nhân sự demo"
+          }
+        },
+        {
+          "run_id": "335f0c54d1e94c15912b0ca880607724",
+          "step": 2,
+          "query": "Hãy tra cứu quỹ phép còn lại của nhân viên NV001.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:11:15.561400+00:00",
+          "offset_ms": 14081.49,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "335f0c54d1e94c15912b0ca880607724",
+          "step": 2,
+          "query": "Hãy tra cứu quỹ phép còn lại của nhân viên NV001.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:11:29.098939+00:00",
+          "offset_ms": 27618.32,
+          "latency_ms": 13536.8,
+          "summary": "Đã có phản hồi cuối",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "335f0c54d1e94c15912b0ca880607724",
+          "step": 2,
+          "query": "Hãy tra cứu quỹ phép còn lại của nhân viên NV001.",
+          "action_type": "FINAL_ANSWER",
+          "timestamp": "2026-09-13T09:11:29.098939+00:00",
+          "offset_ms": 27618.34,
+          "latency_ms": 0,
+          "output": "Thông tin quỹ phép của nhân viên **Nguyễn Đức Tâm** (Mã: **NV001**):\n\n* **Vị trí / Phòng ban:** AI Engineer - Engineering\n* **Tổng số phép năm 2026:** 18 ngày\n* **Đã sử dụng:** 6 ngày\n* **Đang chờ duyệt:** 0 ngày\n* **Quỹ phép còn lại khả dụng:** **12 ngày**"
+        }
+      ]
+    },
+    {
+      "test_case": "TC03",
+      "run_id": "527676ffde6241cdb3dac289bebad89a",
+      "status": "completed",
+      "answer": "Đơn nghỉ phép của bạn đã được tạo thành công và đang ở trạng thái chờ duyệt (PENDING):\n\n- **Mã đơn:** `LV-15DB427B`\n- **Nhân viên:** Nguyễn Đức Tâm (NV001)\n- **Thời gian nghỉ:** 21/09/2026 – 23/09/2026\n- **Số ngày tính phép:** 3 ngày làm việc\n- **Lý do:** Việc gia đình\n- **Người duyệt:** Trần Minh Anh\n- **Quỹ phép khả dụng còn lại:** 9 ngày\n\n*Lưu ý: Đơn hiện đang chờ quản lý phê duyệt.*",
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "live": true,
+      "mode": "agent",
+      "tool_calls": 3,
+      "tokens": 4748,
+      "duration_ms": 59421.99,
+      "trace": [
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 0,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "RUN_START",
+          "timestamp": "2026-09-13T09:11:30.089104+00:00",
+          "offset_ms": 0.1,
+          "latency_ms": 0,
+          "provider": "gemini",
+          "model": "gemini-3.8-flash",
+          "live": true,
+          "mode": "agent"
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 0,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "MCP_READY",
+          "timestamp": "2026-09-13T09:11:31.272325+00:00",
+          "offset_ms": 1182.79,
+          "latency_ms": 1182.66,
+          "tools": [
+            "hr_query",
+            "calculate_leave_days",
+            "create_leave_request",
+            "list_leave_requests"
+          ],
+          "transport": "stdio · JSON-RPC 2.0"
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 1,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:11:31.272325+00:00",
+          "offset_ms": 1182.8,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 1,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:12:10.868145+00:00",
+          "offset_ms": 40778.27,
+          "latency_ms": 39595.43,
+          "summary": "Đề xuất: hr_query, calculate_leave_days",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 1,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "ACTION",
+          "timestamp": "2026-09-13T09:12:10.868145+00:00",
+          "offset_ms": 40778.3,
+          "latency_ms": 0,
+          "tool_name": "hr_query",
+          "arguments": {
+            "topic": "balance",
+            "employee_id": "NV001"
+          },
+          "call_id": "3d7fe729336b41ed856eff10939a61e3"
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 1,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "OBSERVATION",
+          "timestamp": "2026-09-13T09:12:10.927136+00:00",
+          "offset_ms": 40838.08,
+          "latency_ms": 59.74,
+          "tool_name": "hr_query",
+          "call_id": "3d7fe729336b41ed856eff10939a61e3",
+          "observation": {
+            "status": "SUCCESS",
+            "employee": {
+              "employee_id": "NV001",
+              "full_name": "Nguyễn Đức Tâm",
+              "department": "Engineering",
+              "position": "AI Engineer",
+              "manager": "Trần Minh Anh",
+              "allowance": 18,
+              "used": 6,
+              "pending_days": 0,
+              "available_days": 12
+            },
+            "policies": null,
+            "source": "SQLite · dữ liệu nhân sự demo"
+          }
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 1,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "ACTION",
+          "timestamp": "2026-09-13T09:12:10.927136+00:00",
+          "offset_ms": 40838.12,
+          "latency_ms": 0,
+          "tool_name": "calculate_leave_days",
+          "arguments": {
+            "start_date": "2026-09-21",
+            "end_date": "2026-09-23"
+          },
+          "call_id": "dadceebb74bd4e39bf6add1888e3d239"
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 1,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "OBSERVATION",
+          "timestamp": "2026-09-13T09:12:10.940712+00:00",
+          "offset_ms": 40851.61,
+          "latency_ms": 13.46,
+          "tool_name": "calculate_leave_days",
+          "call_id": "dadceebb74bd4e39bf6add1888e3d239",
+          "observation": {
+            "status": "SUCCESS",
+            "start_date": "2026-09-21",
+            "end_date": "2026-09-23",
+            "days": 3,
+            "workdays": [
+              "2026-09-21",
+              "2026-09-22",
+              "2026-09-23"
+            ],
+            "excluded_days": 0,
+            "calendar": "Lịch demo 2026"
+          }
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 2,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:12:10.941676+00:00",
+          "offset_ms": 40851.97,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 2,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:12:16.725084+00:00",
+          "offset_ms": 46635.8,
+          "latency_ms": 5783.79,
+          "summary": "Đề xuất: create_leave_request",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 2,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "ACTION",
+          "timestamp": "2026-09-13T09:12:16.725084+00:00",
+          "offset_ms": 46635.82,
+          "latency_ms": 0,
+          "tool_name": "create_leave_request",
+          "arguments": {
+            "employee_id": "NV001",
+            "start_date": "2026-09-21",
+            "reason": "việc gia đình",
+            "end_date": "2026-09-23"
+          },
+          "call_id": "63043670b15c4194acc411964d7b69bb"
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 2,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "OBSERVATION",
+          "timestamp": "2026-09-13T09:12:16.742109+00:00",
+          "offset_ms": 46652.96,
+          "latency_ms": 17.11,
+          "tool_name": "create_leave_request",
+          "call_id": "63043670b15c4194acc411964d7b69bb",
+          "observation": {
+            "status": "SUCCESS",
+            "request": {
+              "request_id": "LV-15DB427B",
+              "employee_id": "NV001",
+              "start_date": "2026-09-21",
+              "end_date": "2026-09-23",
+              "days": 3,
+              "reason": "việc gia đình",
+              "status": "PENDING",
+              "created_at": "2026-09-13T09:12:16.733097+00:00"
+            },
+            "manager": "Trần Minh Anh",
+            "available_days": 9,
+            "message": "Đã tạo đơn chờ quản lý duyệt và giữ chỗ quỹ phép. Chưa được phê duyệt."
+          }
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 3,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:12:16.742109+00:00",
+          "offset_ms": 46653.06,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 3,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:12:29.393321+00:00",
+          "offset_ms": 59303.97,
+          "latency_ms": 12650.89,
+          "summary": "Đã có phản hồi cuối",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "527676ffde6241cdb3dac289bebad89a",
+          "step": 3,
+          "query": "Tạo đơn nghỉ phép cho NV001 từ 21/09/2026 đến 23/09/2026, lý do: việc gia đình.",
+          "action_type": "FINAL_ANSWER",
+          "timestamp": "2026-09-13T09:12:29.393321+00:00",
+          "offset_ms": 59303.98,
+          "latency_ms": 0,
+          "output": "Đơn nghỉ phép của bạn đã được tạo thành công và đang ở trạng thái chờ duyệt (PENDING):\n\n- **Mã đơn:** `LV-15DB427B`\n- **Nhân viên:** Nguyễn Đức Tâm (NV001)\n- **Thời gian nghỉ:** 21/09/2026 – 23/09/2026\n- **Số ngày tính phép:** 3 ngày làm việc\n- **Lý do:** Việc gia đình\n- **Người duyệt:** Trần Minh Anh\n- **Quỹ phép khả dụng còn lại:** 9 ngày\n\n*Lưu ý: Đơn hiện đang chờ quản lý phê duyệt.*"
+        }
+      ]
+    },
+    {
+      "test_case": "TC04",
+      "run_id": "18f982d3b6134cf48ae352df5be102e3",
+      "status": "completed",
+      "answer": "Đơn nghỉ phép của bạn đã được tạo thành công và đang ở trạng thái **chờ duyệt (PENDING)**.\n\n**Thông tin chi tiết đơn nghỉ phép:**\n- **Mã đơn:** `LV-71E673F1`\n- **Nhân viên:** Lê Thu Hà (NV002)\n- **Thời gian:** Từ 18/09/2026 đến 22/09/2026\n- **Số ngày tính phép:** 3 ngày làm việc (đã trừ cuối tuần)\n- **Lý do:** Du lịch cùng gia đình\n- **Quản lý phê duyệt:** Phạm Hoàng Nam\n- **Quỹ phép khả dụng còn lại:** 5 ngày",
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "live": true,
+      "mode": "agent",
+      "tool_calls": 3,
+      "tokens": 4950,
+      "duration_ms": 55086.68,
+      "trace": [
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 0,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "RUN_START",
+          "timestamp": "2026-09-13T09:12:30.157973+00:00",
+          "offset_ms": 0.25,
+          "latency_ms": 0,
+          "provider": "gemini",
+          "model": "gemini-3.8-flash",
+          "live": true,
+          "mode": "agent"
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 0,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "MCP_READY",
+          "timestamp": "2026-09-13T09:12:31.298599+00:00",
+          "offset_ms": 1141.51,
+          "latency_ms": 1141.23,
+          "tools": [
+            "hr_query",
+            "calculate_leave_days",
+            "create_leave_request",
+            "list_leave_requests"
+          ],
+          "transport": "stdio · JSON-RPC 2.0"
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 1,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:12:31.298599+00:00",
+          "offset_ms": 1141.53,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 1,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:12:43.991042+00:00",
+          "offset_ms": 13833.47,
+          "latency_ms": 12691.92,
+          "summary": "Đề xuất: hr_query, calculate_leave_days",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 1,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "ACTION",
+          "timestamp": "2026-09-13T09:12:43.991042+00:00",
+          "offset_ms": 13833.48,
+          "latency_ms": 0,
+          "tool_name": "hr_query",
+          "arguments": {
+            "employee_id": "NV002",
+            "topic": "balance"
+          },
+          "call_id": "736d46dc132f40048f620aecdb7d2cb8"
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 1,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "OBSERVATION",
+          "timestamp": "2026-09-13T09:12:44.025046+00:00",
+          "offset_ms": 13868.04,
+          "latency_ms": 34.54,
+          "tool_name": "hr_query",
+          "call_id": "736d46dc132f40048f620aecdb7d2cb8",
+          "observation": {
+            "status": "SUCCESS",
+            "employee": {
+              "employee_id": "NV002",
+              "full_name": "Lê Thu Hà",
+              "department": "People & Culture",
+              "position": "HR Specialist",
+              "manager": "Phạm Hoàng Nam",
+              "allowance": 16,
+              "used": 8,
+              "pending_days": 0,
+              "available_days": 8
+            },
+            "policies": null,
+            "source": "SQLite · dữ liệu nhân sự demo"
+          }
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 1,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "ACTION",
+          "timestamp": "2026-09-13T09:12:44.025046+00:00",
+          "offset_ms": 13868.06,
+          "latency_ms": 0,
+          "tool_name": "calculate_leave_days",
+          "arguments": {
+            "start_date": "2026-09-18",
+            "end_date": "2026-09-22"
+          },
+          "call_id": "7103ca4de6844c99b3bc8d08a0c7eaa8"
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 1,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "OBSERVATION",
+          "timestamp": "2026-09-13T09:12:44.031043+00:00",
+          "offset_ms": 13873.82,
+          "latency_ms": 5.74,
+          "tool_name": "calculate_leave_days",
+          "call_id": "7103ca4de6844c99b3bc8d08a0c7eaa8",
+          "observation": {
+            "status": "SUCCESS",
+            "start_date": "2026-09-18",
+            "end_date": "2026-09-22",
+            "days": 3,
+            "workdays": [
+              "2026-09-18",
+              "2026-09-21",
+              "2026-09-22"
+            ],
+            "excluded_days": 2,
+            "calendar": "Lịch demo 2026"
+          }
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 2,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:12:44.031043+00:00",
+          "offset_ms": 13873.96,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 2,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:13:21.021733+00:00",
+          "offset_ms": 50864.85,
+          "latency_ms": 36990.86,
+          "summary": "Đề xuất: create_leave_request",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 2,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "ACTION",
+          "timestamp": "2026-09-13T09:13:21.021733+00:00",
+          "offset_ms": 50864.86,
+          "latency_ms": 0,
+          "tool_name": "create_leave_request",
+          "arguments": {
+            "employee_id": "NV002",
+            "end_date": "2026-09-22",
+            "reason": "du lịch cùng gia đình",
+            "start_date": "2026-09-18"
+          },
+          "call_id": "3e1a9039c1964b7b92d28c95bc87301e"
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 2,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "OBSERVATION",
+          "timestamp": "2026-09-13T09:13:21.045733+00:00",
+          "offset_ms": 50888.39,
+          "latency_ms": 23.51,
+          "tool_name": "create_leave_request",
+          "call_id": "3e1a9039c1964b7b92d28c95bc87301e",
+          "observation": {
+            "status": "SUCCESS",
+            "request": {
+              "request_id": "LV-71E673F1",
+              "employee_id": "NV002",
+              "start_date": "2026-09-18",
+              "end_date": "2026-09-22",
+              "days": 3,
+              "reason": "du lịch cùng gia đình",
+              "status": "PENDING",
+              "created_at": "2026-09-13T09:13:21.029733+00:00"
+            },
+            "manager": "Phạm Hoàng Nam",
+            "available_days": 5,
+            "message": "Đã tạo đơn chờ quản lý duyệt và giữ chỗ quỹ phép. Chưa được phê duyệt."
+          }
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 3,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:13:21.045733+00:00",
+          "offset_ms": 50888.51,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 3,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:13:25.060958+00:00",
+          "offset_ms": 54903.28,
+          "latency_ms": 4014.73,
+          "summary": "Đã có phản hồi cuối",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "18f982d3b6134cf48ae352df5be102e3",
+          "step": 3,
+          "query": "Kiểm tra quỹ phép NV002. Nếu đủ, tạo đơn nghỉ từ 18/09/2026 đến 22/09/2026, lý do: du lịch cùng gia đình.",
+          "action_type": "FINAL_ANSWER",
+          "timestamp": "2026-09-13T09:13:25.060958+00:00",
+          "offset_ms": 54903.33,
+          "latency_ms": 0,
+          "output": "Đơn nghỉ phép của bạn đã được tạo thành công và đang ở trạng thái **chờ duyệt (PENDING)**.\n\n**Thông tin chi tiết đơn nghỉ phép:**\n- **Mã đơn:** `LV-71E673F1`\n- **Nhân viên:** Lê Thu Hà (NV002)\n- **Thời gian:** Từ 18/09/2026 đến 22/09/2026\n- **Số ngày tính phép:** 3 ngày làm việc (đã trừ cuối tuần)\n- **Lý do:** Du lịch cùng gia đình\n- **Quản lý phê duyệt:** Phạm Hoàng Nam\n- **Quỹ phép khả dụng còn lại:** 5 ngày"
+        }
+      ]
+    },
+    {
+      "test_case": "TC05",
+      "run_id": "d31de97b1adc4aaea4010340566cf57e",
+      "status": "completed",
+      "answer": "Không tìm thấy mã nhân viên **NV999** trong hệ thống. Bạn vui lòng kiểm tra lại mã nhân viên nhé!",
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "live": true,
+      "mode": "agent",
+      "tool_calls": 1,
+      "tokens": 2170,
+      "duration_ms": 36942.41,
+      "trace": [
+        {
+          "run_id": "d31de97b1adc4aaea4010340566cf57e",
+          "step": 0,
+          "query": "Tra cứu ngày phép còn lại của NV999.",
+          "action_type": "RUN_START",
+          "timestamp": "2026-09-13T09:13:25.804817+00:00",
+          "offset_ms": 0.11,
+          "latency_ms": 0,
+          "provider": "gemini",
+          "model": "gemini-3.8-flash",
+          "live": true,
+          "mode": "agent"
+        },
+        {
+          "run_id": "d31de97b1adc4aaea4010340566cf57e",
+          "step": 0,
+          "query": "Tra cứu ngày phép còn lại của NV999.",
+          "action_type": "MCP_READY",
+          "timestamp": "2026-09-13T09:13:26.902569+00:00",
+          "offset_ms": 1097.83,
+          "latency_ms": 1097.69,
+          "tools": [
+            "hr_query",
+            "calculate_leave_days",
+            "create_leave_request",
+            "list_leave_requests"
+          ],
+          "transport": "stdio · JSON-RPC 2.0"
+        },
+        {
+          "run_id": "d31de97b1adc4aaea4010340566cf57e",
+          "step": 1,
+          "query": "Tra cứu ngày phép còn lại của NV999.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:13:26.902569+00:00",
+          "offset_ms": 1097.84,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "d31de97b1adc4aaea4010340566cf57e",
+          "step": 1,
+          "query": "Tra cứu ngày phép còn lại của NV999.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:13:47.603671+00:00",
+          "offset_ms": 21799.16,
+          "latency_ms": 20701.27,
+          "summary": "Đề xuất: hr_query",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "d31de97b1adc4aaea4010340566cf57e",
+          "step": 1,
+          "query": "Tra cứu ngày phép còn lại của NV999.",
+          "action_type": "ACTION",
+          "timestamp": "2026-09-13T09:13:47.604717+00:00",
+          "offset_ms": 21799.2,
+          "latency_ms": 0,
+          "tool_name": "hr_query",
+          "arguments": {
+            "topic": "balance",
+            "employee_id": "NV999"
+          },
+          "call_id": "9a5121197d1f47ee87a7ebed38a1d976"
+        },
+        {
+          "run_id": "d31de97b1adc4aaea4010340566cf57e",
+          "step": 1,
+          "query": "Tra cứu ngày phép còn lại của NV999.",
+          "action_type": "OBSERVATION",
+          "timestamp": "2026-09-13T09:13:47.683928+00:00",
+          "offset_ms": 21878.67,
+          "latency_ms": 79.4,
+          "tool_name": "hr_query",
+          "call_id": "9a5121197d1f47ee87a7ebed38a1d976",
+          "observation": {
+            "status": "NOT_FOUND",
+            "message": "Không tìm thấy mã nhân viên. Vui lòng kiểm tra lại mã."
+          }
+        },
+        {
+          "run_id": "d31de97b1adc4aaea4010340566cf57e",
+          "step": 2,
+          "query": "Tra cứu ngày phép còn lại của NV999.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:13:47.683928+00:00",
+          "offset_ms": 21879.06,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "d31de97b1adc4aaea4010340566cf57e",
+          "step": 2,
+          "query": "Tra cứu ngày phép còn lại của NV999.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:14:02.588473+00:00",
+          "offset_ms": 36783.5,
+          "latency_ms": 14904.41,
+          "summary": "Đã có phản hồi cuối",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "d31de97b1adc4aaea4010340566cf57e",
+          "step": 2,
+          "query": "Tra cứu ngày phép còn lại của NV999.",
+          "action_type": "FINAL_ANSWER",
+          "timestamp": "2026-09-13T09:14:02.588473+00:00",
+          "offset_ms": 36783.53,
+          "latency_ms": 0,
+          "output": "Không tìm thấy mã nhân viên **NV999** trong hệ thống. Bạn vui lòng kiểm tra lại mã nhân viên nhé!"
+        }
+      ]
+    },
+    {
+      "test_case": "TC06",
+      "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+      "status": "completed",
+      "answer": "Không thể tạo đơn nghỉ phép cho nhân viên **NV003 (Trần Quốc Bảo)** vì không đủ số dư ngày phép:\n\n- **Thời gian xin nghỉ:** 21/09/2026 – 25/09/2026 (5 ngày làm việc)\n- **Số ngày phép khả dụng hiện tại:** 1 ngày (Tổng: 12, Đã dùng: 11)\n- **Thiếu:** 4 ngày phép\n\nBạn vui lòng điều chỉnh lại khoảng thời gian nghỉ phù hợp với số phép còn lại nhé!",
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "live": true,
+      "mode": "agent",
+      "tool_calls": 2,
+      "tokens": 2857,
+      "duration_ms": 65489.87,
+      "trace": [
+        {
+          "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+          "step": 0,
+          "query": "Nếu đủ phép, tạo đơn cho NV003 từ 21/09/2026 đến 25/09/2026, lý do: du lịch.",
+          "action_type": "RUN_START",
+          "timestamp": "2026-09-13T09:14:03.378051+00:00",
+          "offset_ms": 0.11,
+          "latency_ms": 0,
+          "provider": "gemini",
+          "model": "gemini-3.8-flash",
+          "live": true,
+          "mode": "agent"
+        },
+        {
+          "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+          "step": 0,
+          "query": "Nếu đủ phép, tạo đơn cho NV003 từ 21/09/2026 đến 25/09/2026, lý do: du lịch.",
+          "action_type": "MCP_READY",
+          "timestamp": "2026-09-13T09:14:04.514431+00:00",
+          "offset_ms": 1136.45,
+          "latency_ms": 1136.31,
+          "tools": [
+            "hr_query",
+            "calculate_leave_days",
+            "create_leave_request",
+            "list_leave_requests"
+          ],
+          "transport": "stdio · JSON-RPC 2.0"
+        },
+        {
+          "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+          "step": 1,
+          "query": "Nếu đủ phép, tạo đơn cho NV003 từ 21/09/2026 đến 25/09/2026, lý do: du lịch.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:14:04.514431+00:00",
+          "offset_ms": 1136.47,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+          "step": 1,
+          "query": "Nếu đủ phép, tạo đơn cho NV003 từ 21/09/2026 đến 25/09/2026, lý do: du lịch.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:14:08.098331+00:00",
+          "offset_ms": 4720.19,
+          "latency_ms": 3583.7,
+          "summary": "Đề xuất: hr_query, calculate_leave_days",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+          "step": 1,
+          "query": "Nếu đủ phép, tạo đơn cho NV003 từ 21/09/2026 đến 25/09/2026, lý do: du lịch.",
+          "action_type": "ACTION",
+          "timestamp": "2026-09-13T09:14:08.098331+00:00",
+          "offset_ms": 4720.21,
+          "latency_ms": 0,
+          "tool_name": "hr_query",
+          "arguments": {
+            "employee_id": "NV003",
+            "topic": "balance"
+          },
+          "call_id": "790bbe5a63cc4f12be9087cde4945513"
+        },
+        {
+          "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+          "step": 1,
+          "query": "Nếu đủ phép, tạo đơn cho NV003 từ 21/09/2026 đến 25/09/2026, lý do: du lịch.",
+          "action_type": "OBSERVATION",
+          "timestamp": "2026-09-13T09:14:08.152332+00:00",
+          "offset_ms": 4774.56,
+          "latency_ms": 54.33,
+          "tool_name": "hr_query",
+          "call_id": "790bbe5a63cc4f12be9087cde4945513",
+          "observation": {
+            "status": "SUCCESS",
+            "employee": {
+              "employee_id": "NV003",
+              "full_name": "Trần Quốc Bảo",
+              "department": "Operations",
+              "position": "Operations Executive",
+              "manager": "Phạm Hoàng Nam",
+              "allowance": 12,
+              "used": 11,
+              "pending_days": 0,
+              "available_days": 1
+            },
+            "policies": null,
+            "source": "SQLite · dữ liệu nhân sự demo"
+          }
+        },
+        {
+          "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+          "step": 1,
+          "query": "Nếu đủ phép, tạo đơn cho NV003 từ 21/09/2026 đến 25/09/2026, lý do: du lịch.",
+          "action_type": "ACTION",
+          "timestamp": "2026-09-13T09:14:08.152332+00:00",
+          "offset_ms": 4774.58,
+          "latency_ms": 0,
+          "tool_name": "calculate_leave_days",
+          "arguments": {
+            "start_date": "2026-09-21",
+            "end_date": "2026-09-25"
+          },
+          "call_id": "ccd100ebfeaa46d78cf821d4d358b46e"
+        },
+        {
+          "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+          "step": 1,
+          "query": "Nếu đủ phép, tạo đơn cho NV003 từ 21/09/2026 đến 25/09/2026, lý do: du lịch.",
+          "action_type": "OBSERVATION",
+          "timestamp": "2026-09-13T09:14:08.161339+00:00",
+          "offset_ms": 4783.24,
+          "latency_ms": 8.64,
+          "tool_name": "calculate_leave_days",
+          "call_id": "ccd100ebfeaa46d78cf821d4d358b46e",
+          "observation": {
+            "status": "SUCCESS",
+            "start_date": "2026-09-21",
+            "end_date": "2026-09-25",
+            "days": 5,
+            "workdays": [
+              "2026-09-21",
+              "2026-09-22",
+              "2026-09-23",
+              "2026-09-24",
+              "2026-09-25"
+            ],
+            "excluded_days": 0,
+            "calendar": "Lịch demo 2026"
+          }
+        },
+        {
+          "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+          "step": 2,
+          "query": "Nếu đủ phép, tạo đơn cho NV003 từ 21/09/2026 đến 25/09/2026, lý do: du lịch.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:14:08.161339+00:00",
+          "offset_ms": 4783.4,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+          "step": 2,
+          "query": "Nếu đủ phép, tạo đơn cho NV003 từ 21/09/2026 đến 25/09/2026, lý do: du lịch.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:15:08.660431+00:00",
+          "offset_ms": 65282.1,
+          "latency_ms": 60498.67,
+          "summary": "Đã có phản hồi cuối",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "847464f63d3d4d679b092a5e1d4661ed",
+          "step": 2,
+          "query": "Nếu đủ phép, tạo đơn cho NV003 từ 21/09/2026 đến 25/09/2026, lý do: du lịch.",
+          "action_type": "FINAL_ANSWER",
+          "timestamp": "2026-09-13T09:15:08.660431+00:00",
+          "offset_ms": 65282.12,
+          "latency_ms": 0,
+          "output": "Không thể tạo đơn nghỉ phép cho nhân viên **NV003 (Trần Quốc Bảo)** vì không đủ số dư ngày phép:\n\n- **Thời gian xin nghỉ:** 21/09/2026 – 25/09/2026 (5 ngày làm việc)\n- **Số ngày phép khả dụng hiện tại:** 1 ngày (Tổng: 12, Đã dùng: 11)\n- **Thiếu:** 4 ngày phép\n\nBạn vui lòng điều chỉnh lại khoảng thời gian nghỉ phù hợp với số phép còn lại nhé!"
+        }
+      ]
+    },
+    {
+      "test_case": "TC07",
+      "run_id": "6ac1f5dd2923428ab2cb0b2e85fa9e8d",
+      "status": "error",
+      "answer": "Không nhận được phản hồi API. Kiểm tra kết nối, quota và cấu hình .env; có thể chọn Demo offline.",
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "live": true,
+      "mode": "agent",
+      "tool_calls": 0,
+      "tokens": 0,
+      "duration_ms": 12622.79,
+      "trace": [
+        {
+          "run_id": "6ac1f5dd2923428ab2cb0b2e85fa9e8d",
+          "step": 0,
+          "query": "Tôi là NV001, tôi muốn xin nghỉ phép.",
+          "action_type": "RUN_START",
+          "timestamp": "2026-09-13T09:15:09.673989+00:00",
+          "offset_ms": 0.14,
+          "latency_ms": 0,
+          "provider": "gemini",
+          "model": "gemini-3.8-flash",
+          "live": true,
+          "mode": "agent"
+        },
+        {
+          "run_id": "6ac1f5dd2923428ab2cb0b2e85fa9e8d",
+          "step": 0,
+          "query": "Tôi là NV001, tôi muốn xin nghỉ phép.",
+          "action_type": "MCP_READY",
+          "timestamp": "2026-09-13T09:15:10.935019+00:00",
+          "offset_ms": 1261.09,
+          "latency_ms": 1260.93,
+          "tools": [
+            "hr_query",
+            "calculate_leave_days",
+            "create_leave_request",
+            "list_leave_requests"
+          ],
+          "transport": "stdio · JSON-RPC 2.0"
+        },
+        {
+          "run_id": "6ac1f5dd2923428ab2cb0b2e85fa9e8d",
+          "step": 1,
+          "query": "Tôi là NV001, tôi muốn xin nghỉ phép.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:15:10.935019+00:00",
+          "offset_ms": 1261.11,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "6ac1f5dd2923428ab2cb0b2e85fa9e8d",
+          "step": 0,
+          "query": "Tôi là NV001, tôi muốn xin nghỉ phép.",
+          "action_type": "ERROR",
+          "timestamp": "2026-09-13T09:15:22.297185+00:00",
+          "offset_ms": 12622.74,
+          "latency_ms": 0,
+          "output": "Không nhận được phản hồi API. Kiểm tra kết nối, quota và cấu hình .env; có thể chọn Demo offline."
+        }
+      ]
+    },
+    {
+      "test_case": "TC08",
+      "run_id": "18f5aac386444e8fa434f09ef1205d6d",
+      "status": "completed",
+      "answer": "Thông tin chính sách nghỉ phép và bảo hiểm áp dụng cho nhân viên **Nguyễn Đức Tâm (NV001)** trong hệ thống demo:\n\n### 1. Chính sách nghỉ phép\n- **Quỹ phép cá nhân (2026):** Tổng hạn mức 18 ngày, đã dùng 6 ngày, còn khả dụng **12 ngày**.\n- **Cách tính ngày nghỉ:** Tính từ thứ Hai đến thứ Sáu, loại trừ các ngày cuối tuần và ngày đóng cửa demo (*01/01, 30/04, 01/05, 02/09*).\n- **Quy định tạo đơn:**\n  - Chỉ nhận đơn trong năm phép 2026, mỗi đơn tối đa 30 ngày lịch.\n  - Đơn khi tạo sẽ ở trạng thái **PENDING** (chờ duyệt) và tạm giữ chỗ quỹ phép.\n  - Người phê duyệt: Quản lý trực tiếp **Trần Minh Anh**.\n\n### 2. Chính sách bảo hiểm\n- **Bảo hiểm sức khỏe:** Nhân viên chính thức áp dụng gói chăm sóc sức khỏe nội bộ **Care Plus**.\n- **Hỗ trợ:** Liên hệ email `hr@peopleops.example` để nhận biểu mẫu và chi tiết quyền lợi bảo hiểm.\n\n*(Lưu ý: Dữ liệu mang tính chất giả lập phục vụ bài lab demo).*",
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "live": true,
+      "mode": "agent",
+      "tool_calls": 1,
+      "tokens": 2983,
+      "duration_ms": 49032.8,
+      "trace": [
+        {
+          "run_id": "18f5aac386444e8fa434f09ef1205d6d",
+          "step": 0,
+          "query": "Tra cứu chính sách bảo hiểm và nghỉ phép áp dụng cho NV001 trong dữ liệu demo.",
+          "action_type": "RUN_START",
+          "timestamp": "2026-09-13T09:15:22.892784+00:00",
+          "offset_ms": 0.12,
+          "latency_ms": 0,
+          "provider": "gemini",
+          "model": "gemini-3.8-flash",
+          "live": true,
+          "mode": "agent"
+        },
+        {
+          "run_id": "18f5aac386444e8fa434f09ef1205d6d",
+          "step": 0,
+          "query": "Tra cứu chính sách bảo hiểm và nghỉ phép áp dụng cho NV001 trong dữ liệu demo.",
+          "action_type": "MCP_READY",
+          "timestamp": "2026-09-13T09:15:24.258672+00:00",
+          "offset_ms": 1365.49,
+          "latency_ms": 1365.34,
+          "tools": [
+            "hr_query",
+            "calculate_leave_days",
+            "create_leave_request",
+            "list_leave_requests"
+          ],
+          "transport": "stdio · JSON-RPC 2.0"
+        },
+        {
+          "run_id": "18f5aac386444e8fa434f09ef1205d6d",
+          "step": 1,
+          "query": "Tra cứu chính sách bảo hiểm và nghỉ phép áp dụng cho NV001 trong dữ liệu demo.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:15:24.258672+00:00",
+          "offset_ms": 1365.5,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "18f5aac386444e8fa434f09ef1205d6d",
+          "step": 1,
+          "query": "Tra cứu chính sách bảo hiểm và nghỉ phép áp dụng cho NV001 trong dữ liệu demo.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:15:31.547122+00:00",
+          "offset_ms": 8654.21,
+          "latency_ms": 7288.66,
+          "summary": "Đề xuất: hr_query",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "18f5aac386444e8fa434f09ef1205d6d",
+          "step": 1,
+          "query": "Tra cứu chính sách bảo hiểm và nghỉ phép áp dụng cho NV001 trong dữ liệu demo.",
+          "action_type": "ACTION",
+          "timestamp": "2026-09-13T09:15:31.547122+00:00",
+          "offset_ms": 8654.25,
+          "latency_ms": 0,
+          "tool_name": "hr_query",
+          "arguments": {
+            "topic": "policy",
+            "employee_id": "NV001"
+          },
+          "call_id": "d18d54f8ed7142e6a0291f0a0769af5b"
+        },
+        {
+          "run_id": "18f5aac386444e8fa434f09ef1205d6d",
+          "step": 1,
+          "query": "Tra cứu chính sách bảo hiểm và nghỉ phép áp dụng cho NV001 trong dữ liệu demo.",
+          "action_type": "OBSERVATION",
+          "timestamp": "2026-09-13T09:15:31.622524+00:00",
+          "offset_ms": 8729.36,
+          "latency_ms": 75.07,
+          "tool_name": "hr_query",
+          "call_id": "d18d54f8ed7142e6a0291f0a0769af5b",
+          "observation": {
+            "status": "SUCCESS",
+            "employee": {
+              "employee_id": "NV001",
+              "full_name": "Nguyễn Đức Tâm",
+              "department": "Engineering",
+              "position": "AI Engineer",
+              "manager": "Trần Minh Anh",
+              "allowance": 18,
+              "used": 6,
+              "pending_days": 0,
+              "available_days": 12
+            },
+            "policies": {
+              "source": "PeopleOps · Sổ tay nhân sự DEMO v1.0",
+              "disclaimer": "Dữ liệu giả lập cho bài lab, không phải chính sách chính thức của VinFast.",
+              "annual_leave": "Hạn mức theo hồ sơ nhân viên. Ngày phép tính từ thứ Hai đến thứ Sáu; trừ ngày đóng cửa trong lịch demo. Đơn chờ duyệt giữ chỗ quỹ phép, chưa phải đã được duyệt.",
+              "approval": "Quản lý trực tiếp xét duyệt. Agent chỉ tạo đơn PENDING, không phê duyệt hoặc gửi email.",
+              "insurance": "Nhân viên chính thức trong bộ dữ liệu demo có gói sức khỏe nội bộ Care Plus; liên hệ hr@peopleops.example để nhận biểu mẫu quyền lợi.",
+              "calendar": "Ngày tham chiếu lab: 13/09/2026. Chỉ nhận đơn trong năm phép 2026, tối đa 30 ngày lịch/đơn. Lịch đóng cửa demo: 01/01, 30/04, 01/05, 02/09; không đại diện lịch nghỉ lễ pháp định đầy đủ."
+            },
+            "source": "SQLite · dữ liệu nhân sự demo"
+          }
+        },
+        {
+          "run_id": "18f5aac386444e8fa434f09ef1205d6d",
+          "step": 2,
+          "query": "Tra cứu chính sách bảo hiểm và nghỉ phép áp dụng cho NV001 trong dữ liệu demo.",
+          "action_type": "LLM_START",
+          "timestamp": "2026-09-13T09:15:31.622524+00:00",
+          "offset_ms": 8729.65,
+          "latency_ms": 0,
+          "summary": "Đang chờ phản hồi mô hình"
+        },
+        {
+          "run_id": "18f5aac386444e8fa434f09ef1205d6d",
+          "step": 2,
+          "query": "Tra cứu chính sách bảo hiểm và nghỉ phép áp dụng cho NV001 trong dữ liệu demo.",
+          "action_type": "THOUGHT",
+          "timestamp": "2026-09-13T09:16:11.703628+00:00",
+          "offset_ms": 48810.82,
+          "latency_ms": 40081.1,
+          "summary": "Đã có phản hồi cuối",
+          "note": "Tóm tắt hành động quan sát được, không phải suy nghĩ nội bộ."
+        },
+        {
+          "run_id": "18f5aac386444e8fa434f09ef1205d6d",
+          "step": 2,
+          "query": "Tra cứu chính sách bảo hiểm và nghỉ phép áp dụng cho NV001 trong dữ liệu demo.",
+          "action_type": "FINAL_ANSWER",
+          "timestamp": "2026-09-13T09:16:11.703628+00:00",
+          "offset_ms": 48810.88,
+          "latency_ms": 0,
+          "output": "Thông tin chính sách nghỉ phép và bảo hiểm áp dụng cho nhân viên **Nguyễn Đức Tâm (NV001)** trong hệ thống demo:\n\n### 1. Chính sách nghỉ phép\n- **Quỹ phép cá nhân (2026):** Tổng hạn mức 18 ngày, đã dùng 6 ngày, còn khả dụng **12 ngày**.\n- **Cách tính ngày nghỉ:** Tính từ thứ Hai đến thứ Sáu, loại trừ các ngày cuối tuần và ngày đóng cửa demo (*01/01, 30/04, 01/05, 02/09*).\n- **Quy định tạo đơn:**\n  - Chỉ nhận đơn trong năm phép 2026, mỗi đơn tối đa 30 ngày lịch.\n  - Đơn khi tạo sẽ ở trạng thái **PENDING** (chờ duyệt) và tạm giữ chỗ quỹ phép.\n  - Người phê duyệt: Quản lý trực tiếp **Trần Minh Anh**.\n\n### 2. Chính sách bảo hiểm\n- **Bảo hiểm sức khỏe:** Nhân viên chính thức áp dụng gói chăm sóc sức khỏe nội bộ **Care Plus**.\n- **Hỗ trợ:** Liên hệ email `hr@peopleops.example` để nhận biểu mẫu và chi tiết quyền lợi bảo hiểm.\n\n*(Lưu ý: Dữ liệu mang tính chất giả lập phục vụ bài lab demo).*"
+        }
+      ]
+    }
+  ]
+}

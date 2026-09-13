@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "browser": "chrome.exe",
+  "checks": [
+    "desktop layout",
+    "lookup",
+    "create request",
+    "balance refresh",
+    "trace details",
+    "JSON download",
+    "request filter",
+    "policies",
+    "presentation",
+    "baseline has no tools",
+    "network error recovery",
+    "mobile navigation and overflow",
+    "mobile form"
+  ],
+  "console_errors": []
+}
