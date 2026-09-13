@@ -44,16 +44,8 @@ def public_error(exc):
     return "Không nhận được phản hồi API. Kiểm tra kết nối, quota và cấu hình .env; có thể chọn Demo offline."
 
 def normalize_gemini_model_name(model: str | None) -> str:
-    if not model:
-        return "gemini-2.5-flash-lite"
-    normalized = model.strip().lower()
-    aliases = {
-        "gemini-3.5-flash-lite": "gemini-2.5-flash-lite",
-        "gemini-3.5-flash": "gemini-2.5-flash",
-        "gemini-3.8-flash": "gemini-2.5-flash",
-        "gemini-3.8-flash-lite": "gemini-2.5-flash-lite",
-    }
-    return aliases.get(normalized, normalized)
+    """Normalize formatting only; never silently substitute a different model."""
+    return (model or "gemini-3.5-flash-lite").strip().lower()
 
 
 def provider_config():

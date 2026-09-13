@@ -1,4 +1,41 @@
-# Báo cáo nghiệm thu Day 03 — PeopleOps HR Assistant
+"""Build the submission report from recorded evidence; never invent results."""
+import json
+import sys
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+ROOT=Path(__file__).resolve().parents[1]
+def read_json(name):
+    path=ROOT/name
+    return json.loads(path.read_text(encoding='utf-8')) if path.exists() else {}
+
+def main():
+    live=read_json('docs/trace_waterfall.json')
+    offline=read_json('docs/trace_waterfall_offline.json')
+    browser=read_json('docs/browser-results.json')
+    cases=read_json('config/test_cases.json')
+    xml=ROOT/'docs/test-results.xml'
+    unit=ET.parse(xml).getroot().find('testsuite') if xml.exists() else None
+    unit_total=int(unit.get('tests','0')) if unit is not None else 0
+    unit_fail=int(unit.get('failures','0'))+int(unit.get('errors','0')) if unit is not None else 0
+    by_case={r['test_case']:r for r in live.get('runs',[])}
+    by_eval={e['id']:e for e in live.get('evaluations',[])}
+    model=', '.join(sorted({r['model'] for r in live.get('runs',[])})) or 'Chưa có bằng chứng API'
+    successful=[r for r in live.get('runs',[]) if r['status']=='completed']
+    example=next((r for r in successful if r['test_case']=='TC04'),next(iter(successful),None))
+    excerpt=[]
+    if example:
+        fields={'step','action_type','summary','tool_name','arguments','observation','output','latency_ms'}
+        excerpt=[{k:v for k,v in e.items() if k in fields} for e in example['trace'] if e['action_type'] in {'THOUGHT','ACTION','OBSERVATION','FINAL_ANSWER'}]
+    rows=[]
+    for case in cases:
+        run=by_case.get(case['id'],{})
+        evaluation=by_eval.get(case['id'],{})
+        tools=' → '.join(e['tool_name'] for e in run.get('trace',[]) if e['action_type']=='ACTION') or 'Không gọi tool'
+        rows.append(f"| {case['id']} | {case['type']} | {'PASS' if evaluation.get('passed') else 'CHƯA ĐẠT'} | {tools} |")
+    all_live=live.get('passed',0)==len(cases) and all(r.get('live') and r.get('status')=='completed' for r in live.get('runs',[]))
+    tool_count=sum(r.get('tool_calls',0) for r in live.get('runs',[]))
+    report=f"""# Báo cáo nghiệm thu Day 03 — PeopleOps HR Assistant
 
 **Học viên:** Nguyễn Đức Tâm · **Mã học viên:** 2A202602921
 **Chủ đề:** 2.1 — Trợ lý nhân sự (HR & Operations)
@@ -46,20 +83,13 @@ Agent gọi LLM nhiều lượt, giữ model content/signatures và trả functi
 
 `create_leave_request` tự kiểm tra ngày, nhân viên, số dư, trùng/chéo đơn; transaction `BEGIN IMMEDIATE` giữ thao tác kiểm tra và trừ phép khả dụng nhất quán khi có yêu cầu đồng thời. PENDING chỉ là chờ duyệt, không phê duyệt hay gửi email.
 
-**Model trong bằng chứng:** `gemini-3.5-flash-lite`.
-**Lần chạy ghi nhận:** `2026-09-13T13:29:34.181386+00:00` (UTC).
-**Kết quả API thật:** **8/8**; **12 tool calls**.
+**Model trong bằng chứng:** `{model}`.
+**Lần chạy ghi nhận:** `{live.get('generated_at','chưa chạy')}` (UTC).
+**Kết quả API thật:** **{live.get('passed',0)}/{live.get('total',0)}**; **{tool_count} tool calls**.
 
 | Case | Tình huống | Kết quả | Chuỗi công cụ |
 | --- | --- | --- | --- |
-| TC01 | direct_query | PASS | Không gọi tool |
-| TC02 | single_tool_query | PASS | hr_query |
-| TC03 | leave_request | PASS | hr_query → calculate_leave_days → create_leave_request |
-| TC04 | conditional_multi_step | PASS | hr_query → calculate_leave_days → create_leave_request |
-| TC05 | unknown_employee | PASS | hr_query |
-| TC06 | insufficient_balance | PASS | hr_query → calculate_leave_days |
-| TC07 | missing_details | PASS | hr_query |
-| TC08 | policy_lookup | PASS | hr_query |
+{chr(10).join(rows)}
 
 TC01–TC05 là năm case chính theo lab; TC06–TC08 mở rộng thiếu phép, thiếu thông tin và chính sách. Mỗi case chạy trên SQLite tạm riêng; kiểm tra trạng thái database, tham số, thứ tự đọc trước ghi, mã đơn xuất hiện trong câu trả lời và các Observation bắt buộc.
 
@@ -69,137 +99,17 @@ Artifact: [trace_waterfall.json](trace_waterfall.json). File chứa model/provid
 
 **Thought** là tóm tắt hành động quan sát được (tool được đề xuất hoặc đã có phản hồi), không phải suy nghĩ nội bộ. Các trường `THOUGHT → ACTION → OBSERVATION → FINAL_ANSWER` có thể kiểm tra trực tiếp trong JSON và UI.
 
-Trích các trường liên quan từ **TC04**, run_id **a4984ca9db6f425c9a0d42f06ab063b9** (giữ nguyên dữ liệu và thời gian đã ghi):
+Trích các trường liên quan từ **{example['test_case'] if example else 'chưa có case thành công'}**, run_id **{example['run_id'] if example else 'chưa có'}** (giữ nguyên dữ liệu và thời gian đã ghi):
 
 ```json
-[
-  {
-    "step": 1,
-    "action_type": "THOUGHT",
-    "latency_ms": 12583.34,
-    "summary": "Đề xuất: hr_query, calculate_leave_days"
-  },
-  {
-    "step": 1,
-    "action_type": "ACTION",
-    "latency_ms": 0,
-    "tool_name": "hr_query",
-    "arguments": {
-      "employee_id": "NV002",
-      "topic": "balance"
-    }
-  },
-  {
-    "step": 1,
-    "action_type": "OBSERVATION",
-    "latency_ms": 33.97,
-    "tool_name": "hr_query",
-    "observation": {
-      "status": "SUCCESS",
-      "employee": {
-        "employee_id": "NV002",
-        "full_name": "Lê Thu Hà",
-        "department": "People & Culture",
-        "position": "HR Specialist",
-        "manager": "Phạm Hoàng Nam",
-        "allowance": 16,
-        "used": 8,
-        "pending_days": 0,
-        "available_days": 8
-      },
-      "policies": null,
-      "source": "SQLite · dữ liệu nhân sự demo"
-    }
-  },
-  {
-    "step": 1,
-    "action_type": "ACTION",
-    "latency_ms": 0,
-    "tool_name": "calculate_leave_days",
-    "arguments": {
-      "start_date": "2026-09-18",
-      "end_date": "2026-09-22"
-    }
-  },
-  {
-    "step": 1,
-    "action_type": "OBSERVATION",
-    "latency_ms": 5.94,
-    "tool_name": "calculate_leave_days",
-    "observation": {
-      "status": "SUCCESS",
-      "start_date": "2026-09-18",
-      "end_date": "2026-09-22",
-      "days": 3,
-      "workdays": [
-        "2026-09-18",
-        "2026-09-21",
-        "2026-09-22"
-      ],
-      "excluded_days": 2,
-      "calendar": "Lịch demo 2026"
-    }
-  },
-  {
-    "step": 2,
-    "action_type": "THOUGHT",
-    "latency_ms": 15039.3,
-    "summary": "Đề xuất: create_leave_request"
-  },
-  {
-    "step": 2,
-    "action_type": "ACTION",
-    "latency_ms": 0,
-    "tool_name": "create_leave_request",
-    "arguments": {
-      "end_date": "2026-09-22",
-      "start_date": "2026-09-18",
-      "reason": "du lịch cùng gia đình",
-      "employee_id": "NV002"
-    }
-  },
-  {
-    "step": 2,
-    "action_type": "OBSERVATION",
-    "latency_ms": 22.16,
-    "tool_name": "create_leave_request",
-    "observation": {
-      "status": "SUCCESS",
-      "request": {
-        "request_id": "LV-22591506",
-        "employee_id": "NV002",
-        "start_date": "2026-09-18",
-        "end_date": "2026-09-22",
-        "days": 3,
-        "reason": "du lịch cùng gia đình",
-        "status": "PENDING",
-        "created_at": "2026-09-13T13:27:18.529934+00:00"
-      },
-      "manager": "Phạm Hoàng Nam",
-      "available_days": 5,
-      "message": "Đã tạo đơn chờ quản lý duyệt và giữ chỗ quỹ phép. Chưa được phê duyệt."
-    }
-  },
-  {
-    "step": 3,
-    "action_type": "THOUGHT",
-    "latency_ms": 15710.73,
-    "summary": "Đã có phản hồi cuối"
-  },
-  {
-    "step": 3,
-    "action_type": "FINAL_ANSWER",
-    "latency_ms": 0,
-    "output": "Quỹ phép của bạn hiện còn 8 ngày. Sau khi tính toán, thời gian từ 18/09/2026 đến 22/09/2026 gồm 3 ngày làm việc (trừ cuối tuần). \n\nĐơn nghỉ phép của bạn đã được tạo thành công:\n- **Mã đơn:** LV-22591506\n- **Khoảng thời gian:** 18/09/2026 – 22/09/2026 (3 ngày)\n- **Lý do:** Du lịch cùng gia đình\n- **Trạng thái:** PENDING (Chờ quản lý trực tiếp là **Phạm Hoàng Nam** duyệt)\n- **Quỹ phép tạm tính sau khi giữ chỗ:** 5 ngày"
-  }
-]
+{json.dumps(excerpt,ensure_ascii=False,indent=2)}
 ```
 
 ### Kiểm chứng bổ sung
 
-- Kiểm thử tự động: **26/26** đạt; [JUnit XML](test-results.xml).
-- Bộ nghiệm thu offline: **8/8**; [trace offline](trace_waterfall_offline.json). Không dùng kết quả này thay cho API thật.
-- UI trình duyệt: **passed**, 13 mục kiểm tra; [browser-results.json](browser-results.json). Gồm tra cứu, tạo đơn, số dư cập nhật, tải trace, bộ lọc, baseline, lỗi mạng và mobile.
+- Kiểm thử tự động: **{unit_total-unit_fail}/{unit_total}** đạt; [JUnit XML](test-results.xml).
+- Bộ nghiệm thu offline: **{offline.get('passed',0)}/{offline.get('total',0)}**; [trace offline](trace_waterfall_offline.json). Không dùng kết quả này thay cho API thật.
+- UI trình duyệt: **{browser.get('status','chưa có kết quả')}**, {len(browser.get('checks',[]))} mục kiểm tra; [browser-results.json](browser-results.json). Gồm tra cứu, tạo đơn, số dư cập nhật, tải trace, bộ lọc, baseline, lỗi mạng và mobile.
 - UI có bốn màn hình: Trợ lý AI, Đơn nghỉ phép, Chính sách, Góc trình bày; có in/lưu PDF và tải JSON trace.
 
 ## 4. Git Repository & Submission — 15%
@@ -212,20 +122,25 @@ Kiểm tra bản đã đẩy bằng `git status --short`, `git log -1 --oneline`
 
 - [x] Đã chọn chủ đề và hoàn thiện 4 tiêu chí Agentic Fit.
 - [x] Đã có JSON Schema, ReAct Loop, native tool calling và MCP stdio thực.
-- [x] Tất cả test nghiệm thu API thật đã đạt.
+- [{'x' if all_live else ' '}] Tất cả test nghiệm thu API thật đã đạt.
 - [x] Đã ghi trace và đưa đoạn trích thực tế vào báo cáo.
 - [ ] Nộp đường dẫn repository vào bài Day 03 trên LMS VLearn; chưa có biên nhận nộp LMS.
 
 ## 5. Cách chạy và giới hạn
 
 ```powershell
-.\.venv\Scripts\python.exe src\web.py
+.\\.venv\\Scripts\\python.exe src\\web.py
 # Mở http://127.0.0.1:8000
-.\.venv\Scripts\python.exe src\app.py --all
-.\.venv\Scripts\python.exe src\app.py --all --offline
-.\.venv\Scripts\python.exe -m pytest -q
+.\\.venv\\Scripts\\python.exe src\\app.py --all
+.\\.venv\\Scripts\\python.exe src\\app.py --all --offline
+.\\.venv\\Scripts\\python.exe -m pytest -q
 ```
 
 Ngày tham chiếu của dữ liệu demo là 13/09/2026, năm phép 2026. Chưa có đăng nhập/phân quyền, phê duyệt/hủy đơn hoặc tích hợp HRIS. Lịch đóng cửa giả lập không phải lịch nghỉ lễ pháp định đầy đủ. API thật vẫn phụ thuộc mạng/quota; offline được ghi nhãn riêng. Hướng dẫn demo: [DEMO_SCRIPT.md](DEMO_SCRIPT.md).
 
 Nguồn kỹ thuật: [Gemini function calling](https://ai.google.dev/gemini-api/docs/function-calling), [MCP Python SDK v1](https://github.com/modelcontextprotocol/python-sdk/tree/v1.x).
+"""
+    (ROOT/'docs/trace_eval.md').write_text('\n'.join(line.rstrip() for line in report.splitlines())+'\n',encoding='utf-8')
+    print(f'Report generated: live {live.get("passed",0)}/{live.get("total",0)}, unit {unit_total-unit_fail}/{unit_total}')
+
+if __name__=='__main__':main()

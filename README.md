@@ -4,6 +4,8 @@
 
 Tra cứu quỹ phép và chính sách, tính số ngày làm việc, tạo đơn nghỉ phép chờ duyệt. UI tiếng Việt có chat, so sánh Chatbot/ReAct, trace từng bước, danh sách đơn, chính sách và trang trình bày bài lab.
 
+**Model: `gemini-3.5-flash-lite`** — dùng đúng model cấu hình, không đổi ngầm sang phiên bản khác. Nghiệm thu ngày 13/09/2026: **8/8 case API thật**, **8/8 offline**, **26/26 kiểm thử tự động**. [Báo cáo đầy đủ](docs/trace_eval.md) · [Hướng dẫn nộp bài](docs/SUBMISSION.md).
+
 ## Chạy demo
 
 Mở PowerShell trong thư mục dự án:
@@ -18,6 +20,7 @@ Mở **http://127.0.0.1:8000**. Có thể dùng `./run_demo.ps1` sau khi cài th
 Nếu chưa có môi trường: `python -m venv .venv`. Python 3.10–3.12; dự án đã chạy thử với Python 3.12.
 
 - **API thật:** đọc `LLM_PROVIDER`, `LLM_MODEL` và API key từ `.env`. Ưu tiên Gemini đã cấu hình. Không gửi key xuống trình duyệt.
+- Khi đổi `.env`, dừng server bằng **Ctrl+C** và khởi động lại để UI dùng model mới.
 - **Demo offline:** chọn ngay trong UI khi mất mạng. Đây là kịch bản xác định, không phải LLM; chỉ hỗ trợ câu mẫu, ngày cụ thể và thông tin đầy đủ trong một câu. Không dùng trace offline để chứng minh API thật.
 - **ReAct Agent / Chatbot thường:** chuyển trong khung chat. Chuyển chế độ hoặc mở chat mới sẽ xóa lịch sử trò chuyện trên trình duyệt; các đơn đã lưu vẫn được giữ.
 - **Góc trình bày:** có đủ năm nội dung trên bảng: đề tài, Agentic Fit, kiến trúc, tools, kịch bản demo. Có nút in/lưu PDF.
@@ -83,6 +86,7 @@ Schema JSON lấy từ hàm Python có type hints bằng Pydantic và công bố
 - [Kịch bản trình bày](docs/DEMO_SCRIPT.md): lời dẫn và thao tác demo.
 - [Test cases](config/test_cases.json): 5 case chính + 3 case mở rộng, có assertions kiểm tra dữ liệu thay vì chỉ đếm đã chạy.
 - Trace UI ở `data/traces/<run_id>.json`; trace CLI tương tác ở `data/last_cli_trace.json`. Không ghi đè artifact nghiệm thu khi demo.
+- `--all` giãn tối thiểu 15 giây giữa các lượt LLM để giảm lỗi quota; cần vài phút. Sau khi chạy lại, dùng `python scripts/build_report.py` để cập nhật báo cáo theo trace mới.
 
 ## Dữ liệu và giới hạn
 

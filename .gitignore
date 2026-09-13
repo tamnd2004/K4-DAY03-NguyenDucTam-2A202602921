@@ -19,4 +19,5 @@ Thumbs.db
 data/
 .pytest_cache/
 test-results/
+.tmp/
 *.log

@@ -5,6 +5,13 @@ from app import run_react_agent, evaluate_case, load_test_cases
 from providers import MockOfflineProvider, ProviderError, GeminiProvider, OpenAIProvider
 from tools import HRStore
 
+def test_requested_gemini_model_is_not_substituted(monkeypatch):
+    from providers import provider_config, normalize_gemini_model_name
+    monkeypatch.setenv("LLM_PROVIDER","gemini")
+    monkeypatch.setenv("LLM_MODEL","gemini-3.5-flash-lite")
+    assert provider_config()["model"]=="gemini-3.5-flash-lite"
+    assert normalize_gemini_model_name("gemini-3.8-flash")=="gemini-3.8-flash"
+
 def test_agent_executes_real_mcp_and_observes_results(db_path):
     case=load_test_cases()[2]
     result=asyncio.run(run_react_agent(case["question"],MockOfflineProvider(),db_path=db_path))
