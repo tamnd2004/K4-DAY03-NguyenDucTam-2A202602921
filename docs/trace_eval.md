@@ -2,19 +2,19 @@
 
 > **Họ và Tên Học viên:** Nguyễn Đức Tâm  
 > **Mã Sinh Viên / Mã Học viên:** 2A202602921  
-> **Chủ đề Lựa chọn:** 2.1 — Trợ lý Nhân sự PeopleOps (HR & Operations)  
+> **Chủ đề Lựa chọn:** 2.1 — Trợ lý Nhân sự PeopleOps (HR & Operations)
 
 ---
 
 ## 1. BẢNG CHẤM ĐIỂM AGENTIC FIT SCORING MATRIX (ĐÁNH GIÁ CHỦ ĐỀ)
 
-| Tiêu chí Đánh giá | Mức độ (1 - 5) | Giải trình chi tiết lý do chọn điểm |
-| :--- | :---: | :--- |
-| **1. Multi-step Reasoning** | 5 / 5 | Tra hồ sơ → tính ngày làm việc → so sánh quỹ phép → tạo đơn → xác nhận mã đơn; cần nhiều bước nối tiếp. |
-| **2. Tool Interaction** | 5 / 5 | Cần đọc và ghi dữ liệu nhân sự trong SQLite qua MCP; LLM không tự biết số dư hoặc tạo được đơn chỉ bằng văn bản. |
-| **3. Dynamic Decision** | 5 / 5 | Agent đổi nhánh theo Observation: thiếu phép, sai mã, trùng đơn hoặc thiếu thông tin thì dừng tạo đơn và giải thích/hỏi lại. |
-| **4. Long Horizon Goal** | 2 / 5 | Giữ mục tiêu trong một phiên nhiều lượt; chưa có tự theo dõi duyệt đơn, nhắc việc hoặc mục tiêu dài hạn. |
-| **TỔNG ĐIỂM AGENTIC FIT** | **17 / 20** | *Tổng điểm > 12/20: Bài toán phù hợp triển khai ReAct Agent.* |
+| Tiêu chí Đánh giá           | Mức độ (1 - 5) | Giải trình chi tiết lý do chọn điểm                                                                                          |
+| :-------------------------- | :------------: | :--------------------------------------------------------------------------------------------------------------------------- |
+| **1. Multi-step Reasoning** |     5 / 5      | Tra hồ sơ → tính ngày làm việc → so sánh quỹ phép → tạo đơn → xác nhận mã đơn; cần nhiều bước nối tiếp.                      |
+| **2. Tool Interaction**     |     5 / 5      | Cần đọc và ghi dữ liệu nhân sự trong SQLite qua MCP; LLM không tự biết số dư hoặc tạo được đơn chỉ bằng văn bản.             |
+| **3. Dynamic Decision**     |     5 / 5      | Agent đổi nhánh theo Observation: thiếu phép, sai mã, trùng đơn hoặc thiếu thông tin thì dừng tạo đơn và giải thích/hỏi lại. |
+| **4. Long Horizon Goal**    |     2 / 5      | Giữ mục tiêu trong một phiên nhiều lượt; chưa có tự theo dõi duyệt đơn, nhắc việc hoặc mục tiêu dài hạn.                     |
+| **TỔNG ĐIỂM AGENTIC FIT**   |  **17 / 20**   | _Tổng điểm > 12/20: Bài toán phù hợp triển khai ReAct Agent._                                                                |
 
 ---
 
@@ -87,5 +87,3 @@
 ---
 
 > ✅ **HOÀN TẤT NỘP BÀI:** Sao chép đường link GitHub Repository cá nhân của bạn: [K4-DAY03-NguyenDucTam-2A202602921](https://github.com/tamnd2004/K4-DAY03-NguyenDucTam-2A202602921) và dán vào ô nộp bài trên hệ thống LMS VLearn để hoàn tất Bài Lab 3!
-
-> **Trạng thái LMS:** Học viên tự nộp link GitHub; chưa có biên nhận xác nhận đã nộp.
